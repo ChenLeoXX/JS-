@@ -77,12 +77,11 @@ class _lazyMan {
         return this
     }
 }
-
-
 LazyMan('leo').eat('banana').sleep(3).eat('dinner').sleepFirst(5)
 
 
 //promise化
+
 class LazyMan {
     constructor(name) {
         this.sleepFirstTime = 0
@@ -118,9 +117,8 @@ class LazyMan {
                 resolve()
             }, time * 1000)
         })
-    }
-}
-
+    }   
+}               
 function Lazy(name) {
     return new LazyMan(name)
 }
