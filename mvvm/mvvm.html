@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mvvm</title>
+</head>
+<body>
+  <div id="app">
+    <h1> my name is {{name}},And my favorite food is {{food}}</h1>
+    <p style="font-size:20px;">来个倒计时吧! {{count}}</p>
+    <button v-on:click="show">show something</button>
+    <input type="text" v-model="msg" style="display:block;margin-top:30px;padding:10px;">
+    <p>{{msg}}</p>
+  </div>
+  <script src="./mvvm.js"></script>
+  <script>
+   let vm = new mvvm({
+     el:'#app',
+     data:{
+       name:'Leo',
+       food:'Dumpling',
+       count:10,
+       msg:''
+     },
+     methods:{
+       show(){
+         alert('Hello World')
+       }
+     }
+   })
+   var timer = setInterval(()=>{
+     vm.count--
+     if(vm.count === 0) clearInterval(timer)
+   },1000)
+  </script>
+</body>
+</html>

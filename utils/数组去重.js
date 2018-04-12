@@ -1,16 +1,8 @@
-function unique(arr) {
-  let res = []
-  for (var i = 0; i < arr.length; i++) {
-    for (var j = 0; j < res.length; j++) {
-      if (arr[i] === res[j])
-        break
-    }
-    if (j === res.length) {
-      res.push(arr[i])
-    }
-  }
-  return res
+
+function unique(arr){
+  return Array.from(new Set(arr))
 }
+
 
 function unique2(arr){
   let res = []
@@ -38,4 +30,3 @@ function unique3(arr){
 
 var array = [{value: 1}, {value: 1}, {value: 2}];
 unique3(array)
-
