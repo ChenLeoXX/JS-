@@ -39,3 +39,7 @@ Student.prototype.score = function(){
   console.log('my score is 100')
 }
 var c = new Student({name:"ha",age:23,class:'初一一班',teacher:'若愚'})
+
+function extend(func,parent,pramas){
+
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>防抖</title>
+  <style>
+    .output{
+      height:150px;
+      width:150px;
+      border:1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div class="output">
+    
+  </div>
+</body>
+<script>
+  let output = document.getElementsByClassName('output')
+  let count = 0
+  function cons(e){
+    console.log(e)
+    output[0].innerText = count++
+  }
+  output[0].onmousemove = debounce(cons,1000)
+  function debounce(func,wait){
+    let timer 
+    console.log('1')
+    return function(){
+      let context = this
+      let args = arguments
+      if(timer) clearTimeout(timer)
+      timer = setTimeout(function(){
+        //绑定放回函数的this，指向事件元素,否则setTimeout指向window，同时传入事件对象
+        func.apply(this,args)
+      },wait)
+    }
+  }
+</script>
+</html>
