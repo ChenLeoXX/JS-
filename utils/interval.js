@@ -37,6 +37,45 @@ function promiseSleep(times,gap){
   }
  }
 
+ /* 
+  实现一个函数，返回一个函数
+  function repeat(func,times,interval){
+
+  }
+ var example = repeat(alert,10,2000)
+ example('你好') 输出 10 次 你好 间隔 2秒
+ */
+
+function repeat(func,times,interval){
+  return function(){
+    let args = arguments
+    for(let i=0;i<times ;i++){
+      setTimeout(()=>{
+        func.apply(null,args)
+      },interval *i)
+    }
+  }
+}
+
+let example = repeat(alert,10,2000)
+example('你好')
+
+//async 
+function repeat2(func,times,interval){
+  // 返回一个async 函数
+  return async function(){
+    let args = arguments
+    for(let i = 0;i<times;i++){
+      // 等待await 执行完才会往下执行
+    await new Promise((resolve)=>{
+          setTimeout(resolve,interval)
+      })
+	  func.apply(null,args)
+     }
+  }
+}
+var example2 = repeat2(console.log,10,2000)
+example2('hello')
 
 
 

@@ -43,3 +43,8 @@ var c = new Student({name:"ha",age:23,class:'初一一班',teacher:'若愚'})
 function extend(func,parent,pramas){
 
 }
+
+function inherit(parent,child){
+  child.prototype = Object.create(parent.prototype)
+  chid.constructor = child
+}
