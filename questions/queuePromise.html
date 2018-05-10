@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+   <div class="ct">
+     <div class="input">
+      <input type="text" id="test">
+     </div>
+     <div class="btns">
+       <button class="btn_1">按钮A</button>
+       <button class="btn_2">按钮B</button>
+     </div>
+   </div>
+</body>
+<script>
+/* 
+  题目：某个应用模块有一个文本框，以及按钮A和按钮B组成，点击按钮A，向指定URL，发送一个ajax请求，并将返回字符串
+  填充到文本框中，点击按钮B同样发送一个ajax请求，填充到文本框中。
+  当用户依次点击按钮A,B的时候，预期效果是 文本框input 依次被 按钮A ，按钮B返回的数据填充，但是由于网络原因，按钮A的
+  返回时间较长，所以效果变成了， 文本框先被按钮 B 数据填充，然后被 按钮A 的数据覆盖。
+  问： 如何解决这个问题，让程序变成期望的顺序执行。
+  思路1： promise的 then 方法内 返回一个 promise。 下一个then就必须等待上一个promise 的resolve结果才会执行。
+  思路2： 利用 数组的push，shift方法形成一个队列，利用标志位flag，控制while循环 入栈 ，出栈执行对应回调。
+ */  
+let btn_1 = document.querySelector('.btn_1')
+let btn_2 = document.querySelector('.btn_2')
+let input = document.querySelector('#test')
+
+var syncPromise=function (){
+  let promise= Promise.resolve()
+  return (url,gap)=>{
+     promise = promise.then(()=>{
+    return new Promise(resolve=>{
+      // setTimeout 模拟异步请求
+      setTimeout(()=>{
+        input.value = url
+        resolve()
+      },gap)
+    })
+  })
+  }
+}()
+btn_1.onclick = function(){
+  syncPromise('url_A',3000)
+}
+btn_2.onclick = function(){
+  syncPromise('url_B',2000)
+}
+
+
+
+//思路2： 利用数组队列的方式。
+function ajax(url,cb){
+  //实现队列
+  if(!Array.isArray(ajax.xhrQueue)){
+    ajxa.xhrQueue = []
+  }
+  let xhrQueue = ajax.xhrQueue
+  let xhr = new XMLHttpRequest()
+  // 推入队列中
+  xhrQueue.push(xhr)
+  xhr.opts={}
+  // 请求加载结束事件
+  	xhr.onloadend = function(){
+    //标志位结束
+    this.opts.hasFinished = true
+    checkQueue()
+  }
+  xhr.opts.hasFinished = false
+  xhr.opts.callback = cb
+  xhr.timeout = 1000 * 8
+  xhr.open('get',url,true)
+  //检查下一个请求
+  function checkQueue(){
+    var xhr = xhrQueue[0]
+    while(xhr && xhr.opts.hasFinished){
+      if(xhr.status === 200 || xhr.status === 304){
+        xhr.opts.callback(xhr.responseText)
+      }
+      //剔除队列中任务
+      xhrQueue.shift()
+      xhr = xhrQueue[0]
+    }
+  }
+}
+
+btn_1.addEventListener('click',function(){
+   ajax('url_a',function(res){
+     input.value = res
+   })
+})
+btn_2.addEventListener('click',function(){
+  ajax('url_b',function(res){
+    input.value = res
+  })
+})
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
