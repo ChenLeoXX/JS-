@@ -17,7 +17,7 @@ function siblings(target){
   return ret  
 }
 //更加优雅的写法
-function sibling(target){
+function sibling(target) {
   let ret = target.parentNode.children
   ret = [...ret]//转化数组
   let index =ret.indexOf(target) //内部比较使用===

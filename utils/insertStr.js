@@ -10,4 +10,4 @@ function insertStr(str,target,insert){
  let char = str.substr(0,index)
  return str.replace(char, char+insert)
 }
-let str = 'As we know, the github is the bigest social platform of Same-sex '
+let str = 'As we know, the github is the biggest social platform of Same-sex '
