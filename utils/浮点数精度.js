@@ -6,6 +6,6 @@
      @parames  n  <Number> 保留小数点后 n 位
      @return  处理过后的小数
 */
-function roundFloat(flo_num,n){
- return Math.round(flo_num * Math.pow(10,n))/ Math.pow(10,n)  
+function roundFloat(flo_num, n) {
+    return Math.round(flo_num * Math.pow(10, n)) / Math.pow(10, n)
 }

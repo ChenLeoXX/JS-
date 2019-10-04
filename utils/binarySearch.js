@@ -9,28 +9,29 @@
   @parames target<Number> 目标值
   @returns  index <Number> 目标值索引
 */
-function binarySearch(nums,target){
-  //入参异常判断
- if(!Array.isArray(nums) || nums.length === 0) return -1
- let startIndex = 0
- let endIndex = nums.length - 1
- //终止条件，如果两个元素相邻那么停止迭代
- while(startIndex + 1 < endIndex){
-   //  mid 取值向下取整，同时注意不超过最大值
-    let mid = Math.floor(startIndex + (endIndex - startIndex)/2)
-    if(nums[mid] < target){
-      startIndex = mid
-    }else{
-      endIndex = mid
+function binarySearch(nums, target) {
+    //入参异常判断
+    if (!Array.isArray(nums) || nums.length === 0) return -1
+    let startIndex = 0
+    let endIndex = nums.length - 1
+    //终止条件，如果两个元素相邻那么停止迭代
+    while (startIndex + 1 < endIndex) {
+        //  mid 取值向下取整，同时注意不超过最大值
+        let mid = Math.floor(startIndex + (endIndex - startIndex) / 2)
+        if (nums[mid] < target) {
+            startIndex = mid
+        } else {
+            endIndex = mid
+        }
     }
- }
- if(nums[startIndex] === target){
-   return startIndex
- }
- if(nums[endIndex] === target){
-   return endIndex
- }
-return -1  
+    if (nums[startIndex] === target) {
+        return startIndex
+    }
+    if (nums[endIndex] === target) {
+        return endIndex
+    }
+    return -1
 }
-var arr = [1,2,3,4,7,9,11,22,56] 
-binarySearch(arr,9) //output 5
+
+var arr = [1, 2, 3, 4, 7, 9, 11, 22, 56]
+binarySearch(arr, 9) //output 5

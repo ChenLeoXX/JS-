@@ -9,9 +9,10 @@
 */
 
 function palindrome(str) {
-  let font = str.replace(/[^A-Za-z0-9]/g,'').toLowerCase() //正则匹配，替换特殊字符
- return font.split('').reverse().join('') === font
-  }
-  palindrome("eye")//true
-  palindrome("almostomla")//false
-  palindrome("0_0 (: /-\ :) 0-0")//true
+    let font = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase() //正则匹配，替换特殊字符
+    return font.split('').reverse().join('') === font
+}
+
+palindrome("eye")//true
+palindrome("almostomla")//false
+palindrome("0_0 (: /-\ :) 0-0")//true

@@ -22,11 +22,13 @@ Eat supper
  
 以此类推。
 */
+
 // 明显的链式调用,和工厂函数. 考察JS运行机制
 
 function LazyMan(name) {
     return new _lazyMan(name)
 }
+
 class _lazyMan {
     constructor(name) {
         this.tasks = [] //创建一个模拟任务队列
@@ -39,10 +41,12 @@ class _lazyMan {
             this.next()
         }, 0)
     }
+
     next() {
         let task = this.tasks.shift()
         task && task()
     }
+
     eat(food) {
         let task = (
             food => () => {
@@ -53,6 +57,7 @@ class _lazyMan {
         this.tasks.push(task)
         return this //返回实例链式调用
     }
+
     sleep(time) {
         let task = (
             time => () => {
@@ -65,6 +70,7 @@ class _lazyMan {
         this.tasks.push(task)
         return this
     }
+
     sleepFirst(time) {
         let task = (
             time => () => {
@@ -77,6 +83,7 @@ class _lazyMan {
         return this
     }
 }
+
 LazyMan('leo').eat('banana').sleep(3).eat('dinner').sleepFirst(5)
 
 
@@ -92,12 +99,14 @@ class LazyMan {
             console.log(`Hi,this is ${name} !`) //2
         })
     }
+
     eat(food) {
         this.promise.then(() => {
             console.log(`eat ${food}~`)
         })
         return this
     }
+
     sleep(time) {
         this.promise = this.promise.then(
             () => {
@@ -106,10 +115,12 @@ class LazyMan {
         )
         return this
     }
+
     sleepFirst(time) {
         this.sleepFirstTime = time
         return this
     }
+
     _sleep(time) {
         console.log(`Wake up after ${time}s`)
         return new Promise((resolve) => {
@@ -117,9 +128,11 @@ class LazyMan {
                 resolve()
             }, time * 1000)
         })
-    }   
-}               
+    }
+}
+
 function Lazy(name) {
     return new LazyMan(name)
 }
+
 Lazy('leo').eat('banana').sleep(3).eat('dinner').sleepFirst(5)

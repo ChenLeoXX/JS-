@@ -174,7 +174,7 @@ async function examPromise2(score) {
       console.log('不及格')
       score = Math.floor(Math.random() * 101)
     }
-    resolve(socre)
+    resolve(score)
   })
 }
 await examPromise2().then(res => {

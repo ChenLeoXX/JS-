@@ -7,24 +7,24 @@
  @parames 构造函数
  @parames 其余参数
 */
-function newFactory(){
-  // 转化成数组
-  let args = [...arguments]
-  // 获取构造函数，shift方法改变原数组
-  let Constructor = args.shift()
-  // 返回一个指向构造函数原型的对象
-  let instance = Object.create(Constructor.prototype)
-  // 改变this
-  let temp = Constructor.apply(instance,args)
-  // 判断是否有返回值和不为null，typeof null返回object
- return (typeof temp === 'object' && temp !== null) ? temp : instance
- }
+function newFactory() {
+    // 转化成数组
+    let args = [...arguments]
+    // 获取构造函数，shift方法改变原数组
+    let Constructor = args.shift()
+    // 返回一个指向构造函数原型的对象
+    let instance = Object.create(Constructor.prototype)
+    // 改变this
+    let temp = Constructor.apply(instance, args)
+    // 判断是否有返回值和不为null，typeof null返回object
+    return (typeof temp === 'object' && temp !== null) ? temp : instance
+}
 
 
- function parent(name,age){
-   this.name = name
-   this.age = age
- }
+function parent(name, age) {
+    this.name = name
+    this.age = age
+}
 
- var child = newFactory(parent,'leo',23)
- console.log(child)
+var child = newFactory(parent, 'leo', 23)
+console.log(child)

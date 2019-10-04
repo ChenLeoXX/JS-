@@ -5,9 +5,10 @@
  @parames  target <String> 字符串要插入的位置
  @returns  <String> 插入后的字符串
 */
-function insertStr(str,target,insert){
- let index = str.search(target) 
- let char = str.substr(0,index)
- return str.replace(char, char+insert)
+function insertStr(str, target, insert) {
+    let index = str.search(target)
+    let char = str.substr(0, index)
+    return str.replace(char, char + insert)
 }
+
 let str = 'As we know, the github is the biggest social platform of Same-sex '
